@@ -54,7 +54,7 @@ public class Main {
         for (Library library : libraries)
         {
             library.setBocks(
-                    library.getBocks().stream().sorted(Comparator.comparingInt(Bock::getScore)).collect(Collectors.toList())
+                    library.getBocks().stream().sorted(Comparator.comparingInt(Bock::getScore).reversed()).collect(Collectors.toList())
             );
             //TODO: D is supposed to be left over time for scan
             int n = library.getScansPerDay() * D;
