@@ -24,10 +24,10 @@ public class Main {
             // List<Library> librariesToScan = getLibrariesToDo(libraries, D);
             /*List<Library> librariesToScan = getLibrariesWithFactor(libraries, D);
             removeDuplicateBooks(librariesToScan);
-            librariesToScan = getBooksToDo(librariesToScan, D);
-            librariesToScan = removeEmptyLibraries(librariesToScan);*/
+            librariesToScan = getBooksToDo(librariesToScan, D);*/
 
             List<Library> librariesToScan = anotherLibraryGetter(libraries, D);
+            librariesToScan = removeEmptyLibraries(librariesToScan);
 
             Writer writer = new Writer("./out/"+file+"output.txt");
             writer.writeResult(librariesToScan);
