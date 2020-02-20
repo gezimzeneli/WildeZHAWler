@@ -15,16 +15,20 @@ public class Main {
         System.out.println(("Hello World"));
 
         Main main = new Main();
-        main.read();
+        String[] files = {"a_example", "b_read_on","c_incunabula","d_tough_choices","e_so_many_books", "f_libraries_of_the_world"};
+        for(String file : files){
+            main.read(file + ".txt");
 
-        // DUMMY
-        int D = days;
-        List<Library> librariesToScan = getLibrariesToDo(libraries, D);
-        removeDuplicateBooks(librariesToScan);
-        librariesToScan = getBooksToDo(librariesToScan, D);
+            // DUMMY
+            int D = days;
+            List<Library> librariesToScan = getLibrariesToDo(libraries, D);
+            removeDuplicateBooks(librariesToScan);
+            librariesToScan = getBooksToDo(librariesToScan, D);
 
-        Writer writer = new Writer("./output.txt");
-        writer.writeResult(librariesToScan);
+            Writer writer = new Writer("./out/"+file+"output.txt");
+            writer.writeResult(librariesToScan);
+        }
+
     }
 
     private static void removeDuplicateBooks(List<Library> libraries){
@@ -73,7 +77,7 @@ public class Main {
                     library.getBocks().stream().sorted(Comparator.comparingInt(Bock::getScore).reversed()).collect(Collectors.toList())
             );
             //TODO: D is supposed to be left over time for scan
-            int n = library.getScansPerDay() * D;
+            long n = (long) library.getScansPerDay() * D;
 
             List<Bock> bestBocks = library.getBocks();
 
@@ -85,8 +89,7 @@ public class Main {
         return libraries;
     }
 
-    private static void read(){
-        String file = "a_example.txt";
+    private static void read(String file){
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             String[] items;
