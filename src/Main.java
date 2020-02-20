@@ -20,6 +20,7 @@ public class Main {
         // DUMMY
         int D = days;
         List<Library> librariesToScan = getLibrariesToDo(libraries, D);
+        removeDuplicateBooks(librariesToScan);
         librariesToScan = getBooksToDo(librariesToScan, D);
 
         Writer writer = new Writer("./output.txt");
@@ -28,17 +29,18 @@ public class Main {
 
     private static void removeDuplicateBooks(List<Library> libraries){
         Set<Bock> addedBocks = new HashSet<>();
-        libraries.forEach(library -> {
-            List<Bock> bestBocks = library.getBocks();
+        for (Library l : libraries){
+            //List<Bock> bestBocks = l.getBocks();
+            List<Bock> bestBocks = new ArrayList<>();
 
-            for(Bock b : library.getBocks()){
+            for(Bock b : l.getBocks()){
                 if (addedBocks.add(b)){
                     bestBocks.add(b);
                 }
             }
 
-            library.setBocks(bestBocks);
-        });
+            l.setBocks(bestBocks);
+        }
     }
 
     private static List<Library> getLibrariesToDo(List<Library> libraries, int D){
