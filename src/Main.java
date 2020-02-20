@@ -104,6 +104,7 @@ public class Main {
                                 temp.add(books.get(Integer.parseInt(items[j])));
                             }
                             library.setBocks(temp);
+                            libraries.add(library);
                         }
                     }
                 }
