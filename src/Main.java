@@ -25,11 +25,17 @@ public class Main {
             List<Library> librariesToScan = getLibrariesWithFactor(libraries, D);
             removeDuplicateBooks(librariesToScan);
             librariesToScan = getBooksToDo(librariesToScan, D);
+            librariesToScan = removeEmptyLibraries(librariesToScan);
 
             Writer writer = new Writer("./out/"+file+"output.txt");
             writer.writeResult(librariesToScan);
         }
 
+    }
+
+    private static List<Library> removeEmptyLibraries(List<Library> libraries)
+    {
+        return libraries.stream().filter(iter -> iter.getBocks().size() > 0).collect(Collectors.toList());
     }
 
     private static void removeDuplicateBooks(List<Library> libraries){
