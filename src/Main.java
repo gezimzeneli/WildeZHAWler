@@ -21,7 +21,8 @@ public class Main {
 
             // DUMMY
             int D = days;
-            List<Library> librariesToScan = getLibrariesToDo(libraries, D);
+            // List<Library> librariesToScan = getLibrariesToDo(libraries, D);
+            List<Library> librariesToScan = getLibrariesWithFactor(libraries, D);
             removeDuplicateBooks(librariesToScan);
             librariesToScan = getBooksToDo(librariesToScan, D);
 
@@ -34,7 +35,6 @@ public class Main {
     private static void removeDuplicateBooks(List<Library> libraries){
         Set<Bock> addedBocks = new HashSet<>();
         for (Library l : libraries){
-            //List<Bock> bestBocks = l.getBocks();
             List<Bock> bestBocks = new ArrayList<>();
 
             for(Bock b : l.getBocks()){
@@ -50,8 +50,25 @@ public class Main {
     private static List<Library> getLibrariesWithFactor(List<Library> libraries, int D){
         removeInvalidLibraries(libraries, D);
 
+        for (Library l : libraries){
+            long n = l.getTimeToSignUp() * D;
+            long bookScoreSum = l.getBocks().stream().filter(b -> b.getScore() > 0).mapToLong(b -> b.getScore()).sum();
+            l.setFactor((n*bookScoreSum)/l.getTimeToSignUp());
+        }
 
+        List<Library> librariesOrdered = libraries.stream()
+                .sorted(Comparator.comparingLong(Library::getFactor))
+                .collect(Collectors.toList());
 
+        List<Library> librariesToScan = new ArrayList<>();
+        for(Library l : librariesOrdered){
+            days += l.getTimeToSignUp();
+            if (days <= D){
+                librariesToScan.add(l);
+            }
+        }
+
+        return librariesToScan;
     }
 
     private static List<Library> removeInvalidLibraries(List<Library> libraries, int D) {

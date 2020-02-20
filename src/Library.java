@@ -5,6 +5,7 @@ public class Library {
     private List<Bock> bocks;
     private int timeToSignUp;
     private int scansPerDay;
+    private long factor;
 
     public Library(int id, List<Bock> bocks, int timeToSignUp, int scansPerDay) {
         this.id = id;
@@ -44,5 +45,13 @@ public class Library {
 
     public void setScansPerDay(int scansPerDay) {
         this.scansPerDay = scansPerDay;
+    }
+
+    public long getFactor() {
+        return factor;
+    }
+
+    public void setFactor(long factor) {
+        this.factor = factor;
     }
 }
