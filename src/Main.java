@@ -68,7 +68,7 @@ public class Main {
     }
 
     private static void read(){
-        String file ="";
+        String file = "a_example.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             String[] items;
