@@ -39,10 +39,16 @@ public class Main {
     private static List<Library> anotherLibraryGetter(List<Library> libraries, long D){
         long daysLeft = D;
         List<Library> actualLibraries = new ArrayList<>();
+        Set<Bock> addedBooks = new HashSet<>();
 
         while (daysLeft > 0 && libraries.size() > 0){
             for (Library l : libraries){
-                // TODO: Remove already added books
+                // Remove already added books...
+                for(Bock b : l.getBocks()){
+                    if (addedBooks.contains(b)){
+                        l.getBocks().remove(b);
+                    }
+                }
                 getScoreForLibrary(l, daysLeft);
             }
 
@@ -52,7 +58,10 @@ public class Main {
 
             actualLibraries.add(libraries.get(0));
 
-            // TODO: Add books to already added books
+            // Add added books to already added ones...
+            for (Bock b : libraries.get(0).getBocks()){
+                addedBooks.add(b);
+            }
 
             libraries.remove(0);
 
