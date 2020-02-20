@@ -1,17 +1,19 @@
+import java.util.List;
+
 public class Library {
     private int id;
-    private Bock[] bocks;
+    private List<Bock> bocks;
     private int timeToSignUp;
     private int scansPerDay;
 
-    public Library(int id, Bock[] bocks, int timeToSignUp, int scansPerDay) {
+    public Library(int id, List<Bock> bocks, int timeToSignUp, int scansPerDay) {
         this.id = id;
         this.bocks = bocks;
         this.timeToSignUp = timeToSignUp;
         this.scansPerDay = scansPerDay;
     }
     public Library(){}
-    
+
     public int getId() {
         return id;
     }
@@ -20,11 +22,11 @@ public class Library {
         this.id = id;
     }
 
-    public Bock[] getBocks() {
+    public List<Bock> getBocks() {
         return bocks;
     }
 
-    public void setBocks(Bock[] bocks) {
+    public void setBocks(List<Bock> bocks) {
         this.bocks = bocks;
     }
 
