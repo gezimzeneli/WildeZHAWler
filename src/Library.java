@@ -11,7 +11,7 @@ public class Library {
         this.scansPerDay = scansPerDay;
     }
     public Library(){}
-    
+
     public int getId() {
         return id;
     }
