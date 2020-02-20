@@ -59,7 +59,7 @@ public class Main {
         for (Library l : libraries){
             long n = l.getTimeToSignUp() * D;
             long bookScoreSum = l.getBocks().stream().filter(b -> b.getScore() > 0).mapToLong(b -> b.getScore()).sum();
-            l.setFactor((n*bookScoreSum)/l.getTimeToSignUp());
+            l.setFactor((n-l.getTimeToSignUp())*bookScoreSum);
         }
 
         List<Library> librariesOrdered = libraries.stream()
