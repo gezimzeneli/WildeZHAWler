@@ -37,6 +37,25 @@ public class Main {
                 for(int i = 0; i < bookCount; i++){
                     books.add(new Bock(Integer.parseInt(items[i]), i));
                 }
+                libraries = new ArrayList<Library>(libraryCount);
+                for(int i=0; i < libraryCount; i++){
+                    if((line = br.readLine()) != null){
+                        items = line.split(" ");
+                        Library library = new Library();
+                        library.setId(i);
+                        int amountBook = Integer.parseInt(items[0]);
+                        library.setTimeToSignUp(Integer.parseInt(items[1]));
+                        library.setScansPerDay(Integer.parseInt(items[2]));
+                        if((line = br.readLine()) != null) {
+                            items = line.split(" ");
+                            ArrayList<Bock> temp = new ArrayList<>(amountBook);
+                            for (int j = 0; j < amountBook; j++) {
+                                temp.add(books.get(Integer.parseInt(items[j])));
+                            }
+                            library.setBocks(temp);
+                        }
+                    }
+                }
             }
 
         } catch (IOException e) {
