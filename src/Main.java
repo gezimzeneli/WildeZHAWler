@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -11,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    private List<Library> libraries;
-    private List<Bock> books;
-    private int bookCount;
-    private int libraryCount;
-    private int days;
+    private static List<Library> libraries;
+    private static List<Bock> books;
+    private static int bookCount;
+    private static int libraryCount;
+    private static int days;
 
     public static void main(String[] args) {
         System.out.println(("Hello World"));
@@ -25,7 +24,7 @@ public class Main {
 
         // DUMMY
         int D = 5;
-        List<Library> librariesToScan = getLibrariesToDo(new ArrayList<>(), D);
+        List<Library> librariesToScan = getLibrariesToDo(libraries, D);
         librariesToScan = getBooksToDo(librariesToScan, D);
     }
 
@@ -68,7 +67,7 @@ public class Main {
         return libraries;
     }
 
-    private void read(){
+    private static void read(){
         String file ="";
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
