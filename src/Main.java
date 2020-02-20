@@ -63,7 +63,7 @@ public class Main {
         }
 
         List<Library> librariesOrdered = libraries.stream()
-                .sorted(Comparator.comparingLong(Library::getFactor))
+                .sorted(Comparator.comparingLong(Library::getFactor).reversed())
                 .collect(Collectors.toList());
 
         List<Library> librariesToScan = new ArrayList<>();
