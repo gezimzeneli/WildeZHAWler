@@ -67,9 +67,10 @@ public class Main {
                 .collect(Collectors.toList());
 
         List<Library> librariesToScan = new ArrayList<>();
+        int lDays = 0;
         for(Library l : librariesOrdered){
-            days += l.getTimeToSignUp();
-            if (days <= D){
+            lDays += l.getTimeToSignUp();
+            if (lDays <= D){
                 librariesToScan.add(l);
             }
         }
@@ -89,12 +90,12 @@ public class Main {
                 .sorted(Comparator.comparingInt(Library::getTimeToSignUp))
                 .collect(Collectors.toList());
 
-        int days = 0;
+        int lDays = 0;
         List<Library> librariesToScan = new ArrayList<>();
 
         for(Library l : librariesOrdered){
-            days += l.getTimeToSignUp();
-            if (days <= D){
+            lDays += l.getTimeToSignUp();
+            if (lDays <= D){
                 librariesToScan.add(l);
             }
         }
