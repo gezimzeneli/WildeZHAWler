@@ -44,9 +44,11 @@ public class Main {
         while (daysLeft > 0 && libraries.size() > 0){
             for (Library l : libraries){
                 // Remove already added books...
-                for(Bock b : l.getBocks()){
+                Iterator<Bock> iter = l.getBocks().iterator();
+                while (iter.hasNext()){
+                    Bock b = iter.next();
                     if (addedBooks.contains(b)){
-                        l.getBocks().remove(b);
+                        iter.remove();
                     }
                 }
                 getScoreForLibrary(l, daysLeft);
