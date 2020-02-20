@@ -5,7 +5,10 @@ public class Library {
     private List<Bock> bocks;
     private int timeToSignUp;
     private int scansPerDay;
+
+    // Custom
     private long factor;
+    private long score;
 
     public Library(int id, List<Bock> bocks, int timeToSignUp, int scansPerDay) {
         this.id = id;
@@ -53,5 +56,13 @@ public class Library {
 
     public void setFactor(long factor) {
         this.factor = factor;
+    }
+
+    public long getScore() {
+        return score;
+    }
+
+    public void setScore(long score) {
+        this.score = score;
     }
 }

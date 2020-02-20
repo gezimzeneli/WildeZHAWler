@@ -9,7 +9,7 @@ public class Main {
     private static List<Bock> books;
     private static int bookCount;
     private static int libraryCount;
-    private static int days;
+    private static long days;
 
     public static void main(String[] args) {
         System.out.println(("Hello World"));
@@ -20,18 +20,71 @@ public class Main {
             main.read(file + ".txt");
 
             // DUMMY
-            int D = days;
+            long D = days;
             // List<Library> librariesToScan = getLibrariesToDo(libraries, D);
-            List<Library> librariesToScan = getLibrariesWithFactor(libraries, D);
+            /*List<Library> librariesToScan = getLibrariesWithFactor(libraries, D);
             removeDuplicateBooks(librariesToScan);
             librariesToScan = getBooksToDo(librariesToScan, D);
-            librariesToScan = removeEmptyLibraries(librariesToScan);
+            librariesToScan = removeEmptyLibraries(librariesToScan);*/
+
+            List<Library> librariesToScan = anotherLibraryGetter(libraries, D);
 
             Writer writer = new Writer("./out/"+file+"output.txt");
             writer.writeResult(librariesToScan);
         }
 
     }
+
+
+    private static List<Library> anotherLibraryGetter(List<Library> libraries, long D){
+        long daysLeft = D;
+        List<Library> actualLibraries = new ArrayList<>();
+
+        while (daysLeft > 0 && libraries.size() > 0){
+            for (Library l : libraries){
+                // TODO: Remove already added books
+                getScoreForLibrary(l, daysLeft);
+            }
+
+            libraries = libraries.stream()
+                    .sorted(Comparator.comparingLong(Library::getScore).reversed())
+                    .collect(Collectors.toList());
+
+            actualLibraries.add(libraries.get(0));
+
+            // TODO: Add books to already added books
+
+            libraries.remove(0);
+
+            daysLeft -= actualLibraries.get(0).getTimeToSignUp();
+        }
+
+        return actualLibraries;
+    }
+
+    private static void getScoreForLibrary(Library lib, long D){
+        long daysForScanning = D - lib.getTimeToSignUp();
+
+        if (daysForScanning > 0){
+            sortBooksDesc(lib);
+
+            List<Bock> books = getPossibleBooks(lib.getScansPerDay()*daysForScanning, lib.getBocks());
+
+            lib.setScore(books.stream().filter(b -> b.getScore() > 0).mapToLong(b -> b.getScore()).sum());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     private static List<Library> removeEmptyLibraries(List<Library> libraries)
     {
@@ -107,20 +160,28 @@ public class Main {
     {
         for (Library library : libraries)
         {
-            library.setBocks(
-                    library.getBocks().stream().sorted(Comparator.comparingInt(Bock::getScore).reversed()).collect(Collectors.toList())
-            );
+            sortBooksDesc(library);
             //TODO: D is supposed to be left over time for scan
             long n = (long) library.getScansPerDay() * D;
 
             List<Bock> bestBocks = library.getBocks();
 
-            bestBocks = bestBocks.stream().limit(n).collect(Collectors.toList());
+            bestBocks = getPossibleBooks(n, bestBocks);
 
             library.setBocks(bestBocks);
         }
 
         return libraries;
+    }
+
+    private static List<Bock> getPossibleBooks(long n, List<Bock> bestBocks) {
+        return bestBocks.stream().limit(n).collect(Collectors.toList());
+    }
+
+    private static void sortBooksDesc(Library library) {
+        library.setBocks(
+                library.getBocks().stream().sorted(Comparator.comparingInt(Bock::getScore).reversed()).collect(Collectors.toList())
+        );
     }
 
     private static void read(String file){
