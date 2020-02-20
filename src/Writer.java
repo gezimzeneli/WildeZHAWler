@@ -1,8 +1,7 @@
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Writer {
 
@@ -36,19 +35,19 @@ private BufferedWriter bufferedWriter;
         }
     }
 
-    public void writeResult(ArrayList<Library> libraries){
+    public void writeResult(List<Library> libraries){
         write(String.valueOf(libraries.size()));
         newLine();
         for (Library library : libraries){
             write(String.valueOf(library.getId()));
-            write("");
+            write(" ");
             write(String.valueOf(library.getBocks().size()));
 
             newLine();
 
             for (Bock book : library.getBocks()){
                 write(String.valueOf(book.getId()));
-                write("");
+                write(" ");
             }
             newLine();
 

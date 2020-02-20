@@ -26,6 +26,9 @@ public class Main {
         int D = days;
         List<Library> librariesToScan = getLibrariesToDo(libraries, D);
         librariesToScan = getBooksToDo(librariesToScan, D);
+
+        Writer writer = new Writer("./output.txt");
+        writer.writeResult(librariesToScan);
     }
 
     private static List<Library> getLibrariesToDo(List<Library> libraries, int D){
