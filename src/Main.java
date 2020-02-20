@@ -47,9 +47,19 @@ public class Main {
         }
     }
 
+    private static List<Library> getLibrariesWithFactor(List<Library> libraries, int D){
+        removeInvalidLibraries(libraries, D);
+
+
+
+    }
+
+    private static List<Library> removeInvalidLibraries(List<Library> libraries, int D) {
+        return libraries.stream().filter(iter -> iter.getTimeToSignUp() < D).collect(Collectors.toList());
+    }
+
     private static List<Library> getLibrariesToDo(List<Library> libraries, int D){
-        // 1. Kick all libraries with a signup time >= D
-        List<Library> validLibraries = libraries.stream().filter(iter -> iter.getTimeToSignUp() < D).collect(Collectors.toList());
+        List<Library> validLibraries = removeInvalidLibraries(libraries, D);
 
         // 2. Libraries with smallest signup time
         List<Library> librariesOrdered = validLibraries.stream()
