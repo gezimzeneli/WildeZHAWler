@@ -71,7 +71,7 @@ public class Main {
     }
 
     private static void read(){
-        String file = "e_so_many_books.txt";
+        String file = "a_example.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             String[] items;
