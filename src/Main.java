@@ -23,7 +23,7 @@ public class Main {
         main.read();
 
         // DUMMY
-        int D = 5;
+        int D = days;
         List<Library> librariesToScan = getLibrariesToDo(libraries, D);
         librariesToScan = getBooksToDo(librariesToScan, D);
     }
