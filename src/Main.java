@@ -1,13 +1,8 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     private static List<Library> libraries;
@@ -31,10 +26,26 @@ public class Main {
         writer.writeResult(librariesToScan);
     }
 
+    private static void removeDuplicateBooks(List<Library> libraries){
+        Set<Bock> addedBocks = new HashSet<>();
+        libraries.forEach(library -> {
+            List<Bock> bestBocks = library.getBocks();
+
+            for(Bock b : library.getBocks()){
+                if (addedBocks.add(b)){
+                    bestBocks.add(b);
+                }
+            }
+
+            library.setBocks(bestBocks);
+        });
+    }
+
     private static List<Library> getLibrariesToDo(List<Library> libraries, int D){
         // 1. Kick all libraries with a signup time >= D
         List<Library> validLibraries = libraries.stream().filter(iter -> iter.getTimeToSignUp() < D).collect(Collectors.toList());
 
+        // 2. Libraries with smallest signup time
         List<Library> librariesOrdered = validLibraries.stream()
                 .sorted(Comparator.comparingInt(Library::getTimeToSignUp))
                 .collect(Collectors.toList());
@@ -62,7 +73,9 @@ public class Main {
             //TODO: D is supposed to be left over time for scan
             int n = library.getScansPerDay() * D;
 
-            List<Bock> bestBocks = library.getBocks().stream().limit(n).collect(Collectors.toList());
+            List<Bock> bestBocks = library.getBocks();
+
+            bestBocks = bestBocks.stream().limit(n).collect(Collectors.toList());
 
             library.setBocks(bestBocks);
         }
