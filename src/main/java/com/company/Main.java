@@ -19,8 +19,8 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        //String[] files = {"data/a"};
-        String[] files = {"data/a", "data/b", "data/d"};
+        String[] files = {"data/a"};
+        //String[] files = {"data/a", "data/b", "data/d"};
 
         for (String file : files) {
             main.read(file + ".txt");
@@ -59,10 +59,21 @@ public class Main {
                     street.setDuration(Integer.parseInt(items[3]));
                     street.setFrom(intersectionStart);
                     street.setTo(intersectionEnd);
-                    intersectionStart.addOutput(street);
-                    intersectionEnd.addInput(street);
-                    intersections.put(intersectionStart.getId(), intersectionStart);
-                    intersections.put(intersectionEnd.getId(), intersectionEnd);
+                    if(intersections.containsKey(intersectionStart.getId())){
+                        intersections.get(intersectionStart.getId()).addOutput(street);
+                    }
+                    else{
+                        intersectionStart.addOutput(street);
+                        intersections.put(intersectionStart.getId(), intersectionStart);
+                    }
+
+                    if(intersections.containsKey(intersectionEnd.getId())){
+                        intersections.get(intersectionEnd.getId()).addInput(street);
+                    }
+                    else{
+                        intersectionEnd.addInput(street);
+                        intersections.put(intersectionEnd.getId(), intersectionEnd);
+                    }
                     streets.put(street.getName(),street);
                 }
             }
