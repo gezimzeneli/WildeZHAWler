@@ -35,6 +35,13 @@ public class Main {
                 carsAmount = Integer.parseInt(items[3]);
                 score = Integer.parseInt(items[4]);
             }
+            for(int i = 0; i < streetsAmount; i++){
+                if((line = br.readLine()) != null){
+                    items = line.split( " ");
+                    //Fill street
+
+                }
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
