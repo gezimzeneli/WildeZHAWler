@@ -25,9 +25,9 @@ public class Main {
 
         for (String file : files) {
             main.read(file + ".txt");
-            Solver.solve(cars, new ArrayList<>(intersections));
+            Solver.solve(cars, new ArrayList<>(intersections.values()));
             Writer a = new Writer("a");
-            a.writeResult(new ArrayList<>(intersections));
+            a.writeResult(new ArrayList<>(intersections.values()));
         }
 
 
