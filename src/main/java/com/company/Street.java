@@ -9,4 +9,12 @@ public class Street {
     String name;
 
     Queue<Car> queue;
+
+    public String getName() {
+        return name;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
 }

@@ -11,6 +11,11 @@ public class Intersection {
     List<Street> output = new ArrayList<>();
     Map<Street, Integer> schedule = new HashMap<>();
 
+    public int getId() {
+        return id;
+    }
 
-
+    public Map<Street, Integer> getSchedule() {
+        return schedule;
+    }
 }
