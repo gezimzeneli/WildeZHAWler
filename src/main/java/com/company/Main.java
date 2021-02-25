@@ -15,13 +15,12 @@ public class Main {
     private static HashMap<String,Street> streets = new HashMap<>();
     private static HashMap<Integer, Intersection> intersections = new HashMap<>();
     private static List<Car> cars = new ArrayList<>();
-    private static Intersection intersectionStart = new Intersection();
-    private static Intersection intersectionEnd = new Intersection();
+
 
     public static void main(String[] args) {
         Main main = new Main();
-        String[] files = {"data/a"};
-        //String[] files = {"data/a", "data/b", "data/d"};
+        //String[] files = {"data/a"};
+        String[] files = {"data/a", "data/b", "data/d"};
 
         for (String file : files) {
             main.read(file + ".txt");
@@ -50,7 +49,8 @@ public class Main {
             for(int i = 0; i < streetsAmount; i++) {
                 if ((line = br.readLine()) != null) {
                     items = line.split(" ");
-
+                    Intersection intersectionStart = new Intersection();
+                    Intersection intersectionEnd = new Intersection();
                     intersectionStart.setId(Integer.parseInt(items[0]));
 
                     intersectionEnd.setId(Integer.parseInt(items[1]));
