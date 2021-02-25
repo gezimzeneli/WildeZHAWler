@@ -19,13 +19,13 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        String[] files = {"data/a"};
-        //String[] files = {"data/a", "data/b", "data/d"};
+        //String[] files = {"data/a"};
+        String[] files = {"data/a", "data/b","data/c", "data/d","data/e","data/f"};
 
         for (String file : files) {
             main.read(file + ".txt");
             Solver.solve(cars, new ArrayList<>(intersections.values()));
-            Writer a = new Writer("a");
+            Writer a = new Writer(file.substring(5) + ".out");
             a.writeResult(new ArrayList<>(intersections.values()));
         }
 
