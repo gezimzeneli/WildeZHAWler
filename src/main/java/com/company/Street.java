@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class Street {
@@ -9,6 +10,10 @@ public class Street {
     String name;
 
     Queue<Car> queue;
+
+    public Street(){
+        queue = new LinkedList<>();
+    }
 
 
     public Intersection getFrom() {
@@ -49,5 +54,9 @@ public class Street {
 
     public void setQueue(Queue<Car> queue) {
         this.queue = queue;
+    }
+
+    public void addCar(Car car){
+        queue.add(car);
     }
 }

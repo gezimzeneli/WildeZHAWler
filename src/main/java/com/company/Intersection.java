@@ -12,6 +12,10 @@ public class Intersection {
     Map<Street, Integer> schedule = new HashMap<>();
 
 
+    public Intersection(){
+        input = new ArrayList<>();
+        output = new ArrayList<>();
+    }
     public int getId() {
         return id;
     }
@@ -42,5 +46,13 @@ public class Intersection {
 
     public void setSchedule(Map<Street, Integer> schedule) {
         this.schedule = schedule;
+    }
+
+    public void addInput(Street street){
+        input.add(street);
+    }
+
+    public void addOutput(Street street){
+        output.add(street);
     }
 }
