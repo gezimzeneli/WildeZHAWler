@@ -3,8 +3,7 @@ package com.company;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -13,16 +12,16 @@ public class Main {
     private static int streetsAmount;
     private static int carsAmount;
     private static int score;
-    private static List<Street> streets = new ArrayList<>();
-    private static List<Intersection> intersections = new ArrayList<>();
+    private static HashMap<String,Street> streets = new HashMap<>();
+    private static Set<Intersection> intersections = new HashSet<>();
     private static List<Car> cars = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Was luegsh?!?!");
         System.err.println("Ich meins ernst!!!");
         Main main = new Main();
-        //String[] files = {"data/a", "data/b", "data/c", "data/d", "data/e", "data/f"};
-        String[] files = {"data/a"};
+        String[] files = {"data/a", "data/b", "data/c", "data/d", "data/e", "data/f"};
+        //String[] files = {"data/a", "data/b", "data/d"};
 
         for (String file : files) {
             main.read(file + ".txt");
@@ -58,7 +57,7 @@ public class Main {
                     intersectionEnd.addInput(street);
                     intersections.add(intersectionStart);
                     intersections.add(intersectionEnd);
-                    streets.add(street);
+                    streets.put(street.getName(),street);
                 }
             }
 
@@ -67,15 +66,12 @@ public class Main {
                         items = line.split( " ");
                         Car car = new Car();
                         car.setId(j);
-                        for(int k = 0; k < Integer.parseInt(items[0])-1; k++){
-                            for(Street street : streets){
-                                if(street.getName().equals(items[k+1])){
-                                    car.addStreet(street);
-                                    street.addCar(car);
-                                }
-                            }
 
+                        for(int k = 0; k < Integer.parseInt(items[0])-1; k++){
+                            car.addStreet(streets.get(items[k+1]));
+                            streets.get(items[k+1]).addCar(car);
                         }
+                        cars.add(car);
 
                     }
             }
