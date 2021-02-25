@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Solver {
 
-    public void solve(List<Car> cars, List<Intersection> intersections){
+    public static void solve(List<Car> cars, List<Intersection> intersections){
 
         for (Car car : cars){
             for (int i = 0; i < car.route.size(); i++) {

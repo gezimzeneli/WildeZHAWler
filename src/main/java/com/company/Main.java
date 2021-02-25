@@ -19,15 +19,18 @@ public class Main {
     private static Intersection intersectionEnd = new Intersection();
 
     public static void main(String[] args) {
-        System.out.println("Was luegsh?!?!");
-        System.err.println("Ich meins ernst!!!");
         Main main = new Main();
-        String[] files = {"data/a", "data/b", "data/c", "data/d", "data/e", "data/f"};
+        String[] files = {"data/a"};
         //String[] files = {"data/a", "data/b", "data/d"};
 
         for (String file : files) {
             main.read(file + ".txt");
+            Solver.solve(cars, new ArrayList<>(intersections));
+            Writer a = new Writer("a");
+            a.writeResult(new ArrayList<>(intersections));
         }
+
+
     }
 
     private void read(String file) {
