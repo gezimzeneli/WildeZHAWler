@@ -13,8 +13,10 @@ public class Main {
     private static int carsAmount;
     private static int score;
     private static HashMap<String,Street> streets = new HashMap<>();
-    private static Set<Intersection> intersections = new HashSet<>();
+    private static HashMap<Integer, Intersection> intersections = new HashMap<>();
     private static List<Car> cars = new ArrayList<>();
+    private static Intersection intersectionStart = new Intersection();
+    private static Intersection intersectionEnd = new Intersection();
 
     public static void main(String[] args) {
         System.out.println("Was luegsh?!?!");
@@ -29,6 +31,7 @@ public class Main {
     }
 
     private void read(String file) {
+
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             String[] items;
@@ -44,9 +47,9 @@ public class Main {
             for(int i = 0; i < streetsAmount; i++) {
                 if ((line = br.readLine()) != null) {
                     items = line.split(" ");
-                    Intersection intersectionStart = new Intersection();
+
                     intersectionStart.setId(Integer.parseInt(items[0]));
-                    Intersection intersectionEnd = new Intersection();
+
                     intersectionEnd.setId(Integer.parseInt(items[1]));
                     Street street = new Street();
                     street.setName(items[2]);
@@ -55,8 +58,8 @@ public class Main {
                     street.setTo(intersectionEnd);
                     intersectionStart.addOutput(street);
                     intersectionEnd.addInput(street);
-                    intersections.add(intersectionStart);
-                    intersections.add(intersectionEnd);
+                    intersections.put(intersectionStart.getId(), intersectionStart);
+                    intersections.put(intersectionEnd.getId(), intersectionEnd);
                     streets.put(street.getName(),street);
                 }
             }
