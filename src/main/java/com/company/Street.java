@@ -9,4 +9,45 @@ public class Street {
     String name;
 
     Queue<Car> queue;
+
+
+    public Intersection getFrom() {
+        return from;
+    }
+
+    public void setFrom(Intersection from) {
+        this.from = from;
+    }
+
+    public Intersection getTo() {
+        return to;
+    }
+
+    public void setTo(Intersection to) {
+        this.to = to;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Queue<Car> getQueue() {
+        return queue;
+    }
+
+    public void setQueue(Queue<Car> queue) {
+        this.queue = queue;
+    }
 }
