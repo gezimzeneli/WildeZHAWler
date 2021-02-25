@@ -23,6 +23,7 @@ public class Main {
         String[] files = {"data/a", "data/b","data/c", "data/d","data/e","data/f"};
 
         for (String file : files) {
+            reset();
             main.read(file + ".txt");
             Solver.solve(cars, new ArrayList<>(intersections.values()));
             Writer a = new Writer(file.substring(5) + ".out");
@@ -30,6 +31,17 @@ public class Main {
         }
 
 
+    }
+
+    private static void reset() {
+        intersections = new HashMap<>();
+        streets = new HashMap<>();
+        cars = new ArrayList<>();
+        simDuration = 0;
+        intersectionsAmount = 0;
+        streetsAmount = 0;
+        carsAmount = 0;
+        score = 0;
     }
 
     private void read(String file) {
