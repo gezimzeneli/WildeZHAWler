@@ -9,6 +9,7 @@ public class Street {
     String name;
 
     Queue<Car> queue;
+    int counter = 0;
 
 
     public Intersection getFrom() {
@@ -49,5 +50,13 @@ public class Street {
 
     public void setQueue(Queue<Car> queue) {
         this.queue = queue;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }
